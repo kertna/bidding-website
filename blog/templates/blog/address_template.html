@@ -1,0 +1,56 @@
+{% extends "blog/base.html" %}
+{% load static %}
+{% block content %}
+<div class="site-section">
+	<div class="container">
+		<div class="row mb-5">
+					<div class="col-lg">
+						<br>
+						<img src="{{ product.image.url }}" height="200px" width="300px" style="margin-bottom: 20px; padding-left: 25px" /> 
+					</div>
+
+
+					<div class="col-lg">
+						<br>
+						<div class="card card-body">
+							<h3>{{product.title}}</h3>
+							<hr>
+							<h4>Total: Rs.{{product.final_value}}</h4>
+							<hr>
+
+						</div>
+					</div>
+				</div>
+		<div style="padding-left: 90px">
+                <h4>Shipping Address:</h4>
+                <ul style="color:black">
+                    <li>{{ name }},</li>
+                    <li>{{ street }},</li>
+                    <li>{{ city }},</li>
+                    <li>{{ pincode }},</li>
+                    <li>{{ phone }},</li>
+                    <li>{{ state }},</li>
+                    <li>{{ country }}.</li>
+                </ul>
+        </div>
+    </br>
+</br>
+        <div class="row" style="padding-left: 90px">
+        	<div class="col">
+        		<div class="form-group">
+              <a href="{% url 'my_bids' %}"><button class="btn btn-outline-info" style ="background-color: #008CBA;" type="submit">Cancel</button></a>
+            </div>
+        </div>
+            <div class="col">
+        		<div class="form-group">
+              <a href="{% url 'stripecheck' product.id %}"><button class="btn btn-outline-info" style ="background-color: #008CBA;" type="submit">Proceed to Payment</button></a>
+            </div>
+        </div>
+        </div>
+    </div>
+	</div>
+</div>
+
+
+
+{% endblock content %}

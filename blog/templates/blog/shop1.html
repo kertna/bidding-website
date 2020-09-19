@@ -1,0 +1,276 @@
+{% extends "blog/base.html" %}
+{% block content %}
+
+<style type="text/css">
+.product-details {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.product__details__pic__item {
+  margin-bottom: 20px;
+}
+
+.product__details__pic__item img {
+  min-width: 100%;
+}
+
+.product__details__text h3 {
+  color: #252525;
+  font-weight: 700;
+  margin-bottom: 9px;
+}
+
+.product__details__text .product__details__price {
+  font-size: 15px;
+  color: #dd2222;
+  font-weight: 600;
+  margin-bottom: 3px;
+}
+
+.product__details__text .primary-btn {
+  padding: 16px 28px 14px;
+  margin-right: 6px;
+  margin-bottom: 5px;
+}
+
+.product__details__text ul {
+  border-top: 1px solid #ebebeb;
+  padding-top: 10px;
+  margin-top: 10px;
+}
+
+.product__details__text ul li {
+  font-size: 16px;
+  color: #1c1c1c;
+  list-style: none;
+  line-height: 36px;
+}
+
+.product__details__text ul li b {
+  font-weight: 700;
+  width: 170px;
+  display: inline-block;
+}
+
+.product__details__text ul li span samp {
+  color: #dd2222;
+}
+
+.product__details__text ul li .share {
+  display: inline-block;
+}
+
+.product__details__text ul li .share a {
+  display: inline-block;
+  font-size: 15px;
+  color: #1c1c1c;
+  margin-right: 25px;
+}
+
+.product__details__text ul li .share a:last-child {
+  margin-right: 0;
+}
+
+.wrapper {
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* Auction index */
+.auction_image_index {
+    /* display: flex; */
+    /* width:100%; */
+
+    /* width:200px; */
+    /* height:200px; */
+    /* border-radius: 12px; */
+
+    margin-top: -20px;
+    margin-left: -20px;
+    margin-right: -20px;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    width:300px;
+    height:300px;
+
+    object-fit: cover;
+    margin-bottom: 10px;
+    /* border-radius: 12px; */
+}
+
+.auction-card {
+    box-shadow: var(--shadow);
+    display: inline-block;
+    flex: 1 0 21%;
+    border-radius: 12px;
+    /* width: 20%; */
+    /* height: 30%; */
+    width: 260px;
+    /* height:200px; */
+    text-decoration: none;
+    color: var(--color7);
+}
+.auction-card:hover {
+    box-shadow: var(--strong-shadow);
+    transition: .3s;
+}
+
+.auction-card-title {
+    font-weight: bold;
+    color: var(--color7);
+    font-size: x-large;
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.auction-card-value {
+    font-weight: bold;
+    color: var(--background);
+    background: var(--color2);
+    padding: 10px;
+    border-radius: 6px;
+    float: right;
+}
+
+.auction-card-inactive {
+    font-weight: bold;
+    color: var(--background);
+    background: var(--color8);
+    padding: 10px;
+    border-radius: 6px;
+    float: left;
+}
+
+.auction-card-active {
+    font-weight: bold;
+    color: var(--background);
+    background: var(--color3);
+    padding: 10px;
+    border-radius: 6px;
+    float: left;
+}
+
+.auction-card-urgent {
+    font-weight: bold;
+    color: var(--background);
+    background: var(--color9);
+    padding: 10px;
+    border-radius: 6px;
+    float: left;
+}
+
+.auction-card-status {
+    font-weight: bold;
+    color: var(--background);
+    background: var(--color1);
+    padding: 10px;
+    border-radius: 6px;
+    float: left;
+    /* display: flex; */
+}
+
+</style>
+
+<section class="product-details spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-6">
+                <div class="product__details__pic">
+                    <div class="product__details__pic__item">
+                        <img class="product__details__pic__item--large" src="../../media/{{products.image}}" alt="" style="height:500px; width:500px;">
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <div class="product__details__text">
+                    <h3>{{products.title}}</h3>
+                    <div class="product__details__price">Original amount :: ₹{{products.minprice}}</div>
+                    {% if products.is_active %}
+                      <div class="product__details__price">Current bid :: ₹{{products.currentbid}}</div>
+                      <div class="product__details__price">No.of bids :: {{products.no_of_bids}}</div>
+                    {% endif %}
+                    <p>Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Vestibulum ac diam sit amet quam
+                        vehicula elementum sed sit amet dui. Sed porttitor lectus nibh. Vestibulum ac diam sit amet
+                        quam vehicula elementum sed sit amet dui. Proin eget tortor risus.</p>
+                    <div class="wrapper">
+                        {% if not own_auction %}
+                            {% if products.is_active %}
+                            <!-- <div class="bid_box"> -->
+                            <form action="{% url 'bid' products.id %}" method="post">
+                            <!-- <form action="/auctions/{{ auction.id }}/bid/" method="post"> -->
+                            {% csrf_token %}
+                            <div class=\"input_label\" style="text-align: none;">
+                            {% if already_bid %}
+                                <p class="product__details__price"> your last bid on this product: ₹{{ products.currentbid }}</p>
+                            {% endif %}
+                            <strong><span style="color:black;padding:5px;">Enter amount (Rs):</span></strong>
+                            <span class="required_field" >*</span>
+                            <span><input class="textbox" type="text" class="input_box" name="amount">
+                            </span><span><a><input class="submit_button" type="submit" class="submit_button" value="Bid"></a>
+                            </form>
+                            <br></span></div>
+                            <!-- </div> -->
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                    <div class="wrapper">
+                      <span class="auction-card">
+                        {% if products.is_active %}
+                            {% if products.remaining_days == 0 %}
+                              {% if products.remaining_hours == 0 %}
+                                <strong><div style="color:black; padding-top:15px;">Remaining Time::{{products.remaining_minutes}}min  {{products.remaining_seconds}}sec</div></strong>
+                              {% else %}
+                                <strong><div style="color:black; padding-top:15px">Remaining Time::{{products.remaining_hours}}hrs {{products.remaining_minutes}}min  {{products.remaining_seconds}}sec</div></strong>
+                              {% endif %}
+                            {% else %}
+                              <strong><div style="color:black; padding-top:15px;">Remaining Time::{{products.remaining_days}}days {{products.remaining_hours}}hrs {{products.remaining_minutes}}min  {{products.remaining_seconds}}sec</div></strong>
+                            {% endif %}
+                        {% elif products.is_exp %}
+                          <div class="auction-card-inactive">Expired</div>
+                          {% if bid.auction.winner and bid.auction.winner == user %}
+                              <div class="auction-card-value">Won for Rs.{{ bid.amount }}</div>
+                          {% else %}
+                              <div class="auction-card-value">Lost</div>
+                          {% endif %}
+                        {% else %}
+                          {% if products.days_left == 0 %}
+                            {% if products.hours_left == 0 %}
+                              <div class="auction-card-inactive">Auctions on this product will start in {{products.minutes_left}}min  {{products.seconds_left}}sec</div>
+                            {% else %}
+                              <div class="auction-card-inactive">Auctions on this product will start in {{products.hours_left}}hrs {{products.minutes_left}}min  {{products.seconds_left}}sec</div>
+                            {% endif %}
+                          {% else %}
+                            <div class="auction-card-inactive">Auctions on this product will start in {{products.days_left}}days {{products.hours_left}}hrs {{products.minutes_left}}min  {{products.seconds_left}}sec</div>
+                          {% endif %}
+                        {% endif %}
+                      </span>
+                    </div>
+                    {% if not own_auction %}
+                      {% if not products.is_active and not products.is_exp%}
+                        <div id="div_id_comments" class="form-group">
+                          <strong><label for="id_comments" style="color:black;">
+                            <strong>Comments</strong>
+                              (if you suspect in this product else ignore)
+                          </label></strong>
+                          <div class>
+                          <input class="textinput textInput form-control form-control" required id="id_comments" maxlength="3000" name="comments" type="text">
+                          </div>
+                        </div>
+                      {% endif %}
+                    {% endif %}
+                    <ul>
+                        <li><b>Availability</b> <span>In Stock</span></li>
+                        <li><b>Shipping</b> <span>01 day shipping. <samp>Free pickup today</samp></span></li>
+                    </ul>
+                </div>
+            </div>
+      
+        </div>
+    </div>
+</section>
+
+{% endblock content %}

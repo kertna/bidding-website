@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+  <title>Orion</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mukta:300,400,700"> 
+  <link rel="stylesheet" href="{% static 'blog/fonts/icomoon/style.css' %}">
+  <link rel="stylesheet" href="{% static 'blog/css/magnific-popup.css' %}">
+  <link rel="stylesheet" href="{% static 'blog/css/jquery-ui.css' %}">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mukta:300,400,700"> 
+  <link rel="stylesheet" href="{% static 'blog/css/aos.css' %}">
+  <link rel="stylesheet" href="{% static 'blog/css/main.css' %}">
+  <!-- Landing page styling -->
+  <style type="text/css">
+
+    body{
+      background-color: #F8F8F8;
+    }
+
+    h3, h5{
+      font-family: 'Fjalla One', sans-serif;
+      font-weight: 100;
+    }
+
+    h3{
+      font-size: 36px;
+    }
+
+    h5{
+      font-size: 24px;
+    }
+
+    p, label{
+      font-family: 'Inter', sans-serif;
+    }
+
+    hr{
+      color:#fff;
+      background-color: #fff;
+      border-top:1px solid #fff;
+      margin-top:20px;
+      margin-bottom: 20px;
+    }
+
+    #container{
+      width:1200px;
+      margin:0 auto;
+      padding-top: 3%;
+    }
+
+    .column-6{
+      width: 50%;
+      float:left;
+    }
+
+    #left-wrapper{
+      background-color: #72cca7;
+      box-shadow: 0 1px 3px 0 #dce0e6;
+        border-radius: 4px;
+        border: 1px solid transparent;
+        padding: 30px;  
+    }
+
+    #right-wrapper{
+      padding: 30px;
+    }
+
+    #profile-pic{
+      width:200px;
+      display:block;
+      margin: 0 auto;
+      border-radius: 50%;
+      float:left;
+
+    }
+
+    #left-wrapper-header{
+      min-width:50%;
+      float:left;
+      padding-left:20px;
+
+    }
+
+    #left-wrapper-header h3{
+      color:#fff;
+
+    }
+
+    #right-wrapper h3{
+      color: #10a195;
+    }
+
+    .coffee-cup{
+      margin-left: 20px;
+      width: 100px;
+    }
+
+    .coffee-cup2{
+      margin-left: 20px;
+      width: 150px;
+    }
+
+    .coffee-cup3{
+      margin-left: 20px;
+      width: 200px;
+    }
+
+    /* ------------------------ FORM FIELDS ------------------------ */
+
+    .form-field-12{
+      width: 100%;
+      margin-bottom: 10px;
+      padding-top: 5px;
+    }
+
+    .form-field-6{
+      width: 50%;
+      float:left;
+      margin-bottom: 10px;
+    }
+
+    select{
+      width: 100%;
+      height: 60px!important;
+      box-shadow: 0 1px 3px 0 #dce0e6;
+        padding: 10px 12px;
+        border-radius: 4px;
+        background-color: #fff;
+        border: 1px solid transparent;
+        font-size: 20px;
+        color:  #44464a;
+    }
+
+    input{
+        box-shadow: 0 1px 3px 0 #dce0e6;
+        height:40px;
+        border-radius: 4px;
+        background-color: #fff;
+        border: 1px solid transparent;
+        color:  #44464a;
+        width: 95%;
+        padding: 5px;
+        font-size: 16px;
+
+    }
+
+    input::placeholder {
+      color: #9fa1a6;
+    }
+
+    /* ------------------------ BUTTON STYLING ------------------------ */
+    .myButton {
+      background-color:#72cca7;
+      display:inline-block;
+      cursor:pointer;
+      color:#ffffff;
+      font-family:Verdana;
+      font-size:17px;
+      padding:10px;
+      width:100%;
+      border-radius: 0;
+      text-decoration:none;
+      text-align: center;
+      transition: .3s;
+    }
+    .myButton:hover {
+      opacity: .6;
+    }
+
+    @media screen and (max-width:1200px){
+      #container{
+        width:80%;
+      }
+
+      .column-6{
+        width: 100%;
+      }
+    }
+
+    @media screen and (max-width:800px){
+      #container{
+        width:100%;
+      }
+
+      .coffee-cup{
+        margin-left: 20px;
+        width: 50px;
+      }
+
+      .coffee-cup2{
+        margin-left: 20px;
+        width: 75px;
+      }
+
+      .coffee-cup3{
+        margin-left: 20px;
+        width: 100px;
+      }
+
+    }
+  </style>
+
+  <!-- Success page styling -->
+  <style type="text/css">
+    h4{
+      font-family: 'Fjalla One', sans-serif;
+      font-weight: 100;
+      font-size: 24px;
+    }
+
+    #box{
+      max-width: 500px;
+      margin:0 auto;
+      margin-top: 100px;
+      padding:30px;
+      background-color: #fff;
+      text-align: center;
+      box-shadow: 0 1px 3px 0 #dce0e6;
+        border-radius: 4px;
+        border: 1px solid transparent;
+    }
+
+    .myButton {
+      background-color:#72cca7;
+      display:inline-block;
+      cursor:pointer;
+      color:#ffffff;
+      font-family:Verdana;
+      font-size:17px;
+      padding:10px;
+      width:100%;
+      border-radius: 0;
+      text-decoration:none;
+      text-align: center;
+      transition: .3s;
+    }
+    .myButton:hover {
+      opacity: .6;
+    }
+
+    #succes-icon{
+      width: 100px;
+
+    }
+  </style>
+</head>
+<body>
+  <header>
+  <!-- Header Start -->
+  <div class="header-area">
+    <div class="main-header header-sticky">
+      <div class="container-fluid">
+        <div class="menu-wrapper">
+            <!-- Logo -->
+
+          <div class="logo">
+            <a style="text-decoration:none; " href="index.html"><h1 style="color:black;"><span style="color:red;">O</span>rion</h1></a>
+          </div>
+          <!-- Main-menu -->
+
+          <div class="main-menu d-none d-lg-block">
+
+            <nav>                                                
+              <ul id="navigation">  
+                <li><a style="text-decoration:none; " href="{% url 'blog-home' %}">Home</a></li>
+                <li><a style="text-decoration:none; " href="{% url 'about' %}">about</a></li>
+                <li><a style="text-decoration:none; " href="#">Auctions</a>
+                  <ul class="submenu">
+                      <li><a style="text-decoration:none; " href="{% url 'upcoming-auctions' %}"> Upcoming Auctions</a></li>
+                      <li><a style="text-decoration:none; " href="{% url 'shop' %}"> Ongoing Auctions</a></li>
+                      <li><a style="text-decoration:none; " href="{% url 'all-auctions' %}">Expired Auctions</a></li>
+                  </ul>
+                </li>
+                <li><a style="text-decoration:none; " href="{% url 'sell' %}">Sell</a></li>
+                <li><a style="text-decoration:none; " href="{% url 'myitems' %}">My items</a></li>
+                <li><a style="text-decoration:none; " href="{% url 'my_bids' %}">My bids</a></li>
+                <li><a style="text-decoration:none; " href="{% url 'contact' %}">Contact</a></li>
+              </ul>
+            </nav>
+
+          </div>
+          
+          <!-- Header Right -->
+          <div class="header-right">
+            {% if  user.is_authenticated %}
+              <div class="col-6 col-md-4 order-3 order-md-3 text-right">
+                <div class="site-top-icons">
+                  <ul>
+                    <li ><a href="{% url 'profile'%}"><span class="fa fa-user"></span></a></li>
+                    <li ><a href="{% url 'myorders'%}"><span class="fa fa-shopping-bag"></span></a></li>
+                    <li ><a href="{% url 'logout'%}"><span class="fa fa-sign-out"></span></a></li>
+                  </ul>
+                </div> 
+
+              </div>
+              {% else %}
+                  <div class="col-6 col-md-4 order-3 order-md-3 text-right">
+                    <div class="container">
+                      <ul>
+                        <li><a href="{% url 'login'%}" style="color:black">Login&nbsp&nbsp&nbsp&nbsp</a></li>
+                        <li><a href="{% url 'blog-register'%}" style="color:black">Register</a></li>
+                      </ul>
+                    </div>
+                  </div>
+              {% endif %}
+          </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div class="col-12">
+            <div class="mobile_menu d-block d-lg-none"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Header End -->
+  </header>
+  {% block content %}
+
+  {% endblock content %}
+  <script src="{% static 'blog/js/jquery-3.3.1.min.js' %}"></script>
+  <script src="{% static 'blog/js/jquery-ui.js' %}"></script>
+  <script src="{% static 'blog/js/popper.min.js' %}"></script>
+  <script src="{% static 'blog/js/owl.carousel.min.js' %}"></script>
+  <script src="{% static 'blog/js/jquery.magnific-popup.min.js' %}"></script>
+  <script src="{% static 'blog/js/aos.js' %}"></script>
+  <script src="{% static 'blog/js/main.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,158 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Orion</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mukta:300,400,700"> 
+  <link rel="stylesheet" href="{% static 'blog/fonts/icomoon/style.css' %}">
+  <link rel="stylesheet" href="{% static 'blog/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'blog/css/magnific-popup.css' %}">
+  <link rel="stylesheet" href="{% static 'blog/css/jquery-ui.css' %}">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="{% static 'blog/css/aos.css' %}">
+  <link rel="stylesheet" href="{% static 'blog/css/main.css' %}">
+  <script src="https://js.stripe.com/v3/"></script>
+</head>
+<body>
+
+<div class="site-wrap">
+<header>
+<!-- Header Start -->
+<div class="header-area">
+  <div class="main-header header-sticky">
+    <div class="container-fluid">
+      <div class="menu-wrapper">
+          <!-- Logo -->
+
+        <div class="logo">
+          <a href="index.html"><h1 style="color:black;"><span style="color:red;">O</span>rion</h1></a>
+        </div>
+        <!-- Main-menu -->
+
+        <div class="main-menu d-none d-lg-block">
+
+          <nav>                                                
+            <ul id="navigation">  
+              <li><a href="{% url 'blog-home' %}">Home</a></li>
+              <li><a href="{% url 'about' %}">about</a></li>
+              <li><a href="#">Auctions</a>
+                <ul class="submenu">
+                    <li><a href="{% url 'upcoming-auctions' %}"> Upcoming Auctions</a></li>
+                    <li><a href="{% url 'shop' %}"> Ongoing Auctions</a></li>
+                    <li><a href="{% url 'all-auctions' %}">Expired Auctions</a></li>
+                </ul>
+              </li>
+              <li><a href="{% url 'sell' %}">Sell</a></li>
+              <li><a href="{% url 'myitems' %}">My items</a></li>
+              <li><a href="{% url 'my_bids' %}">My bids</a></li>
+              <li><a href="{% url 'contact' %}">Contact</a></li>
+            </ul>
+          </nav>
+
+        </div>
+        
+        <!-- Header Right -->
+        <div class="header-right">
+          {% if  user.is_authenticated %}
+            <div class="col-6 col-md-4 order-3 order-md-3 text-right">
+              <div class="site-top-icons">
+                <ul>
+                  <li ><a href="{% url 'profile'%}"><span class="fa fa-user"></span></a></li>
+                  <li ><a href="{% url 'my_wishlist'%}"><span class="fa fa-heart"></span></a></li>
+                  <li ><a href="{% url 'myorders'%}"><span class="fa fa-shopping-bag"></span></a></li>
+                  <li ><a href="{% url 'logout'%}"><span class="fa fa-sign-out"></span></a></li>
+                </ul>
+              </div> 
+
+            </div>
+            {% else %}
+                <div class="col-6 col-md-4 order-3 order-md-3 text-right">
+                  <div class="container">
+                    <ul>
+                      <li><a href="{% url 'login'%}" style="color:black">Login&nbsp&nbsp&nbsp&nbsp</a></li>
+                      <li><a href="{% url 'blog-register'%}" style="color:black">Register</a></li>
+                    </ul>
+                  </div>
+                </div>
+            {% endif %}
+        </div>
+      </div>
+      <!-- Mobile Menu -->
+      <div class="col-12">
+          <div class="mobile_menu d-block d-lg-none"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Header End -->
+</header>
+<body>
+  <div class="container">
+    {% block content %}{% endblock %}
+  </div>
+</body>
+<footer class="footer-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3">
+          <div class="footer-left">
+              <div class="footer-logo">
+                  <a href="#"><h1 style="color:white;"><span style="color:red;">O</span>rion</h1></a>
+              </div>
+              <ul style="color:white;">
+                  <li>630 Gnan Marg, Sri City, Satyavedu Mandal, Chittor dist, Andhra Pradesh, India</li>
+                  <li>Phone: +91 9381487445</li>
+                  <li>Email: orionwebsite123@gmail.com</li>
+              </ul>
+          </div>
+      </div>
+        <div class="col-lg-2 offset-lg-1">
+            <div class="footer-widget">
+                <h5>Information</h5>
+                <ul>
+                    <li><a href="{% url 'about' %}">About Us</a></li>
+                    <li><a href="{% url 'profile' %}">Profile</a></li>
+                    <li><a href="{% url 'contact' %}">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-lg-2">
+            <div class="footer-widget offset-lg-3">
+                <h5>My Account</h5>
+                <ul style="color:white;">
+                    <li><a href="{% url 'myitems' %}">My items</a></li>
+                    <li><a href="{% url 'my_bids' %}">My bids</a></li>
+                    <li><a href="{% url 'my_wishlist' %}">My wishlist</a></li>
+                    <li><a href="{% url 'myorders' %}">My orders</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-lg-2 offset-lg-1">
+            <div class="footer-widget">
+                <h5>Our services</h5>
+                <ul style="color:white;">
+                    <li style="padding-bottom: 10px;">Free Shipping</li>
+                    <li style="padding-bottom: 10px;">Free Returns</li>
+                    <li style="padding-bottom: 10px;">Customer Support</li>
+                    <li style="padding-bottom: 10px;">100% Verification</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+  </div>
+</footer>
+</div>
+<script src="{% static 'blog/js/jquery-3.3.1.min.js' %}"></script>
+<script src="{% static 'blog/js/jquery-ui.js' %}"></script>
+<script src="{% static 'blog/js/popper.min.js' %}"></script>
+<script src="{% static 'blog/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'blog/js/owl.carousel.min.js' %}"></script>
+<script src="{% static 'blog/js/jquery.magnific-popup.min.js' %}"></script>
+<script src="{% static 'blog/js/aos.js' %}"></script>
+<script src="{% static 'blog/js/main.js' %}"></script>
+
+</body>
+</html>
+

@@ -1,0 +1,67 @@
+
+{% extends "blog/base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content%}
+<body >
+    
+    <div class="bg-light py-3">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 mb-0"><a href="{% url 'blog-home' %}"></span> <strong style="color:blue;">Home</strong></a> <span class="mx-2 mb-0">/</span> <strong class="text-black">Contact</strong></div>
+    </div>
+  </div>
+</div>
+
+<div class="site-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-7"> 
+        <form method="POST"> 
+               {% csrf_token %}
+               <fieldset class="form-group">
+                    <h2 class="border-bottom mb-4">Get In Touch </h2>
+                    {{ form|crispy}}
+               </fieldset>
+               <div class="form-group">
+                     <button class="btn btn-primary btn-lg btn-block" type="submit" style ="background-color: #008CBA;">Send Message</button>
+               </div>
+         </form>
+       </div>
+       <div class="col-md-5 ml-auto">
+          <div class="contact-widget">
+            <div class="cw-item">
+                <div class="ci-icon">
+                    <i class="fa fa-map-marker"></i>
+                </div>
+                <div class="ci-text">
+                    <span>Address:</span>
+                    <p>630 Gnan Marg, Sri City, Satyavedu Mandal, Chittor dist, Andhra Pradesh, India</p>
+                </div>
+            </div>
+            <div class="cw-item">
+                <div class="ci-icon">
+                    <i class="fa fa-mobile"></i>
+                </div>
+                <div class="ci-text">
+                    <span>Phone:</span>
+                    <p>+91 9381487445</p>
+                </div>
+            </div>
+            <div class="cw-item">
+                <div class="ci-icon">
+                    <i class="fa fa-envelope"></i>
+                </div>
+                <div class="ci-text">
+                    <span>Email:</span>
+                    <p>orionwebsite123@gmail.com</p>
+                </div>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+  </body>
+
+  {% endblock content%}

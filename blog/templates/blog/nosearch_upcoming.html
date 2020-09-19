@@ -1,0 +1,61 @@
+{% extends "blog/base.html" %}
+{% block content %}
+<div class="bg-light py-3">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 mb-0"><a href="{% url 'blog-home' %}"></span> <strong style="color:blue;">Home</strong></a> <span class="mx-2 mb-0">/</span> <strong class="text-black">Upcoming Auctions</strong></div>
+    </div>
+  </div>
+</div> 
+<div class="row" style="padding-top:50px; padding-left: 85px; padding-right: 85px;">
+  <div class="column" style="float: left; width: 33.33%;">
+    <div class="dropdown mr-1 ml-md-auto">
+        <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="padding:22px 30px">
+        Price range
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="{% url 'pricerange7' %}">Rs.0 to Rs.10000</a>
+          <a class="dropdown-item" href="{% url 'pricerange8' %}">Rs.10000 to Rs.1Lakh</a>
+          <a class="dropdown-item" href="{% url 'pricerange9' %}">Rs.1Lakh to Rs.10Lakh</a>
+        </div>
+        </div>
+      </div>
+  </div>
+  <div class="column" style="float: left; width: 33.33%;">
+    <div class="search-container">
+
+     <form method="GET" action="{% url 'search_upcoming' %}" >
+        <label class="sr-only" for="inlineFormInputGroupUsername">Search</label>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <div class="input-group-text"><span class="icon icon-search"></span></div>
+          </div>
+          <input type="text" name="q3" value="{{request.GET.q3}}" id="inlineFormInputGroupUsername" class="form-control border-0" placeholder="Search" style="background: lightblue;">
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="column" style="float: left; width: 33.33%;">
+    <div class="d-flex">
+      <div class="dropdown mr-1 ml-md-auto">
+        <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Category
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="http://localhost:8000/results-upcoming/?q3=Paintings">Paintings</a>
+          <a class="dropdown-item" href="http://localhost:8000/results-upcoming/?q3=Historic">Historic</a>
+          <a class="dropdown-item" href="http://localhost:8000/results-upcoming/?q3=Others">Others</a>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class=con style="height:240px;padding-top: 30px">
+    <div class="alert alert-info">
+        Oops! Not Found!
+    </div>
+ </div>
+{% endblock content %}

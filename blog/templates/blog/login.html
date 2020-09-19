@@ -1,0 +1,39 @@
+{% extends "blog/base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content%}
+
+<body >
+    <div class="one">
+     {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{messages.tags}}">
+              {{message}}
+            </div>
+        {% endfor%}
+     {% endif %}
+    </div>
+     <div style="height: 550px;padding-top: 40px;width: 400px;margin-left: 351px">
+         <form method="POST"> 
+               {% csrf_token %}
+               <fieldset class="form-group">
+                    <h2 class="border-bottom mb-4">LOGIN </h2>
+                    {{ form|crispy}}
+               </fieldset>
+               <div class="form-group">
+                     <button class="btn btn-outline-info" type="submit" style ="background-color: #008CBA;">Login</button>
+                   <small class="text-muted ml-2">
+                    <a style="color:black;font-family:mukta;font-size:130%" href="{% url 'password_reset' %}">Forgot Password?</a>
+                </small>
+              </div>
+         </form>
+         <div class="border-top pt-3">
+                <h4 class="text-muted">
+                  Need an account? <a style="color:black;font-size:85%;" href="{% url 'blog-register'%}">Sign Up</a>
+                </h4>
+
+         </div>
+    </div>
+  </body>
+
+  {% endblock content%}

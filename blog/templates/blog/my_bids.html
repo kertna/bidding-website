@@ -1,0 +1,87 @@
+{% extends "blog/base.html" %}
+
+{% block content %}
+<body>
+<div class="bg-light py-3">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 mb-0"><a href="{% url 'blog-home' %}"><strong style="color:blue;">Home</strong></a> <span class="mx-2 mb-0">/</span> <strong class="text-black">My bids</strong></div>
+    </div>
+  </div>
+</div>
+<h4>
+{% if my_bids_list %}
+<div class=shop1 style="width: 100%;  height: 1100px; padding:50px;padding-top: 0px;  margin: 20px;">
+    <div class="row">
+      {% for bid in my_bids_list %}
+        <div style="color:black;font-size: 20px;margin: 20px;">
+    
+        <img src="{{ bid.auction.image.url }}" height="200px" width="300px" style="margin-bottom: 20px; padding-left: 25px" /> 
+     
+        <center><div style="margin-left:30px">
+          <div>
+            <a href="{% url 'shop-item' bid.auction.pk %}"  style="color:blue">{{ bid.auction.title }}</a>
+          </div><br>
+          Current Bid : {{ bid.auction.currentbid }}<br></br>
+          Category : {{ bid.auction.category }}<br></br>
+          <!--DESCRIPTION : {{item.description}}<br></br>-->
+          {% if bid.auction.is_active %}
+              <div class="my-bid-status-active">Pending</div>
+          {% else %}
+              {% if bid.auction.winner and bid.auction.winner == user %}
+                  <div class="my-bid-status-won">Won for Rs.{{ bid.amount }}</div>
+                  <div class="form-group">
+                  {% if bid.auction.is_paid %}
+                    <div>Paid</div>
+                  {% else %}
+                    <a href="{% url 'address' bid.auction.id %}"><button class="btn btn-outline-info" style ="background-color: #008CBA;" type="submit">Buy Now!</button></a>
+                  {% endif %}
+            </div><br></br>
+              {% else %}
+                  <div class="my-bid-status-lost">Lost</div>
+              {% endif %}
+          {% endif %}
+          
+        </div></center>
+         
+        </div>
+    {% endfor %}
+    </div>
+    <div class=shop1 style="width: 100%;  height: 300px; padding: 30px;  margin: 5px;">
+      <div class="pagination" style="width: 100%;  height: 60px;">
+      
+      {% if my_bids_list.has_previous %}
+        <a class="btn btn-outline-info mb-4" style ="background-color: #008CBA;" href="?page=1">First</a>
+        <a class="btn btn-outline-info mb-4" style ="background-color: #008CBA;" href="?page={{my_bids_list.previous_page_number}}">Previous</a>
+      {% endif %}
+      
+      {% for num in my_bids_list.paginator.page_range %}
+        {% if my_bids_list.number == num %}
+          <a class="btn btn-info mb-4" style ="background-color: #008CBA;" href="?page={{ num }}">{{ num }}</a>  
+        {% elif num > my_bids_list.number|add:'-3' and num < my_bids_list.number|add:'3' %}  
+          <a class="btn btn-outline-info mb-4" style ="background-color: #008CBA;" href="?page={{ num }}">{{ num }}</a> 
+        {% endif %}
+      {% endfor %}
+
+      {% if my_bids_list.has_next %}
+        <a class="btn btn-outline-info mb-4" style ="background-color: #008CBA;" href="?page={{ my_bids_list.next_page_number}}">Next</a>
+        <a class="btn btn-outline-info mb-4" style ="background-color: #008CBA;" href="?page={{ my_bids_list.paginator.num_pages}}">Last</a>
+      {% endif %}
+
+      </div> 
+    </div>
+</div>
+   
+{% else %}
+<div class=con style="height:240px;padding-top: 30px">
+    <div class="alert alert-info">
+        There are no bids by you yet! To bid - <a style="color:blue;" href="{% url 'shop' %}">Click here</a>
+    </div>
+ </div>
+
+{% endif %}
+</div>
+</div>
+</h4>
+</body>
+{% endblock content %}

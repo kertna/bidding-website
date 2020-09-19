@@ -1,0 +1,121 @@
+{% extends "blog/base.html" %}
+{% block content%}
+<body>
+<div class="bg-light py-3">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 mb-0"><a href="{% url 'blog-home' %}"></span> <strong style="color:blue;">Home</strong></a> <span class="mx-2 mb-0">/</span> <strong class="text-black">Upcoming Auctions</strong></div>
+    </div>
+  </div>
+</div> 
+<h4>
+<div class="row" style="padding-top:50px; padding-left: 85px; padding-right: 85px;">
+  <div class="column" style="float: left; width: 33.33%;">
+    <div class="dropdown mr-1 ml-md-auto">
+        <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="padding:22px 30px">
+        Price range
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="{% url 'pricerange7' %}">Rs.0 to Rs.10000</a>
+          <a class="dropdown-item" href="{% url 'pricerange8' %}">Rs.10000 to Rs.1Lakh</a>
+          <a class="dropdown-item" href="{% url 'pricerange9' %}">Rs.1Lakh to Rs.10Lakh</a>
+        </div>
+        </div>
+      </div>
+  </div>
+  <div class="column" style="float: left; width: 33.33%;">
+    <div class="search-container">
+
+     <form method="GET" action="{% url 'search_upcoming' %}" >
+        <label class="sr-only" for="inlineFormInputGroupUsername">Search</label>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <div class="input-group-text"><span class="icon icon-search"></span></div>
+          </div>
+          <input type="text" name="q3" value="{{request.GET.q3}}" id="inlineFormInputGroupUsername" class="form-control border-0" placeholder="Search" style="background: lightblue;">
+        </div>
+    </form>
+    </div>
+  </div>
+  <div class="column" style="float: left; width: 33.33%;">
+    <div class="d-flex">
+      <div class="dropdown mr-1 ml-md-auto">
+        <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="padding:22px 23px;">
+        Category
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="http://localhost:8000/results-upcoming/?q3=Paintings">Paintings</a>
+          <a class="dropdown-item" href="http://localhost:8000/results-upcoming/?q3=Historic">Historic</a>
+          <a class="dropdown-item" href="http://localhost:8000/results-upcoming/?q3=Others">Others</a>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% if items %}
+<div class=shop1 style="width: 100%;  height: 1100px; padding: 20px;  padding-top:0px; margin: 20px;">
+  <div class="row">
+    {% for post in items %}
+      <div style="color:black;font-size: 20px;margin: 20px;">
+  
+      <img src="{{ post.image.url }}" height="200px" width="300px" style="margin-bottom: 20px; padding-left: 25px" /> 
+   
+      <center><div style="margin-left:30px">
+        <div>
+          <a href="{% url 'shop-item' post.pk %}" style="color:blue">{{post.title}}</a>
+        </div><br>
+        Category : {{post.category}}<br>
+        Start time: {{post.starttime}}<br>
+        End time: {{post.endtime}}<br></br>
+        <div class="form-group">
+          <a href="{% url 'add-to-wishlist' post.pk %}"><button class="btn btn-outline-info" style ="background-color: #008CBA;padding:20px 28px;" type="submit">Add to wishlist</button></a>
+        </div>
+
+      </div></center>
+       
+      </div>
+    {% endfor %}
+  </div>
+<div class=shop1 style="width: 100%;  height: 100px; padding: 30px;  margin: 5px;">
+  <div class="pagination" style="width: 100%;  height: 60px;">
+  
+  {% if items.has_previous %}
+    <a class="btn btn-outline-info mb-4" style ="background-color: #008CBA;"  href="?page=1">First</a>
+    <a class="btn btn-outline-info mb-4" style ="background-color: #008CBA;" href="?page={{items.previous_page_number}}">Previous</a>
+  {% endif %}
+  
+  {% for num in items.paginator.page_range %}
+    {% if items.number == num %}
+      <a class="btn btn-info mb-4" style ="background-color: #008CBA;" href="?page={{ num }}">{{ num }}</a>  
+    {% elif num > items.number|add:'-3' and num < items.number|add:'3' %}  
+      <a class="btn btn-outline-info mb-4" style ="background-color: #008CBA;" href="?page={{ num }}">{{ num }}</a> 
+    {% endif %}
+  {% endfor %}
+
+    {% if items.has_next %}
+      <a class="btn btn-outline-info mb-4" style ="background-color: #008CBA;" href="?page={{ items.next_page_number}}">Next</a>
+      <a class="btn btn-outline-info mb-4" style ="background-color: #008CBA;" href="?page={{ items.paginator.num_pages}}">Last</a>
+    {% endif %}
+
+    </div> 
+
+</div>
+</div>
+{% else %}
+<div class=con style="height:240px;padding-top: 30px">
+    <div class="alert alert-info">
+        Oops! There are no auctions available currently.
+    </div>
+ </div>
+
+{% endif %}
+</div>
+</div>
+</h4>
+ 
+
+</body>
+{% endblock content %}
